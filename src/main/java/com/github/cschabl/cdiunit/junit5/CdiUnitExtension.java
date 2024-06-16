@@ -6,19 +6,21 @@ import org.jboss.weld.bootstrap.spi.Deployment;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import org.jboss.weld.resources.spi.ResourceLoader;
-import org.jglue.cdiunit.internal.TestConfiguration;
-import org.jglue.cdiunit.internal.Weld11TestUrlDeployment;
-import org.jglue.cdiunit.internal.WeldTestUrlDeployment;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.*;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Optional;
 import java.util.logging.Logger;
+
+import io.github.cdiunit.internal.TestConfiguration;
+import io.github.cdiunit.internal.Weld11TestUrlDeployment;
+import io.github.cdiunit.internal.WeldTestUrlDeployment;
 
 /**
  * CdiUnitExtension is a JUnit5 test instance factory that uses a CDI container to create unit test objects.
@@ -178,7 +180,7 @@ public class CdiUnitExtension implements TestInstanceFactory, AfterEachCallback,
         oldFactory = System.getProperty(JNDI_FACTORY_PROPERTY);
 
         if (oldFactory == null) {
-            System.setProperty(JNDI_FACTORY_PROPERTY, "org.jglue.cdiunit.internal.naming.CdiUnitContextFactory");
+            System.setProperty(JNDI_FACTORY_PROPERTY, "io.github.cdiunit.internal.naming.CdiUnitContextFactory");
             logger.finer(() -> "set CdiUnitContextFactory as JNDI factory");
         }
         else {
